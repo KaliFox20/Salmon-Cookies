@@ -1,15 +1,15 @@
 'use strict';
 
-let StoreSection = document.getElementById('Stores');
+let storesSection = document.getElementById('stores');
 
 let Hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
-function RandomCust(min, max) {
+function randomCust(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 
 }
 
-let Seattle = {
+let seattle = {
   name: 'Seattle',
   custMin: 23,
   custMax: 65,
@@ -17,20 +17,19 @@ let Seattle = {
   cust: 0,
   total: 0,
   getCust: function (){
-    this.cust = randomCust(this.CustMin, this.CustMax);
+    this.cust = randomCust(this.custMin, this.custMax);
   },
   CookiesTotal: function (NumCookies){
     return Math.round(NumCookies * this.avg);
-  }
+  },
   render: function () {
     let ulElem = document.createElement('ul');
     ulElem.textContent = this.name;
-    storesSection.appendChild(ulElem);
 
     for (let i = 0; i < Hours.length; i++){
       let liElem = document.createElement('li');
       this.getCust();
-      liElem.textContent = `${hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
+      liElem.textContent = `${Hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
       this.total += this.CookiesTotal(this.cust);
       ulElem.appendChild(liElem);
     }
@@ -38,12 +37,14 @@ let Seattle = {
     let liElem = document.createElement('li');
     liElem.textContent = `Total: ${this.total} cookies`;
     ulElem.appendChild(liElem);
-  },
+    storesSection.appendChild(ulElem);
+
+  }
 };
 
-Seattle.render();
+seattle.render();
 
-let Tokyo = {
+let tokyo = {
   name: 'Tokyo',
   custMin: 3,
   custMax: 24,
@@ -51,11 +52,11 @@ let Tokyo = {
   cust: 0,
   total: 0,
   getCust: function (){
-    this.cust = randomCust(this.CustMin, this.CustMax);
+    this.cust = randomCust(this.custMin, this.custMax);
   },
   CookiesTotal: function (NumCookies){
     return Math.round(NumCookies * this.avg);
-  }
+  },
   render: function () {
     let ulElem = document.createElement('ul');
     ulElem.textContent = this.name;
@@ -64,7 +65,7 @@ let Tokyo = {
     for (let i = 0; i < Hours.length; i++){
       let liElem = document.createElement('li');
       this.getCust();
-      liElem.textContent = `${hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
+      liElem.textContent = `${Hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
       this.total += this.CookiesTotal(this.cust);
       ulElem.appendChild(liElem);
     }
@@ -72,12 +73,12 @@ let Tokyo = {
     let liElem = document.createElement('li');
     liElem.textContent = `Total: ${this.total} cookies`;
     ulElem.appendChild(liElem);
-},
+}
 };
 
-Tokyo.render(); 
+tokyo.render(); 
 
-let Dubai = {
+let dubai = {
   name: 'Dubai',
   custMin: 11,
   custMax: 38,
@@ -85,11 +86,11 @@ let Dubai = {
   cust: 0,
   total: 0,
   getCust: function (){
-    this.cust = randomCust(this.CustMin, this.CustMax);
+    this.cust = randomCust(this.custMin, this.custMax);
   },
   CookiesTotal: function (NumCookies){
     return Math.round(NumCookies * this.avg);
-  }
+  },
   render: function () {
     let ulElem = document.createElement('ul');
     ulElem.textContent = this.name;
@@ -98,7 +99,7 @@ let Dubai = {
     for (let i = 0; i < Hours.length; i++){
       let liElem = document.createElement('li');
       this.getCust();
-      liElem.textContent = `${hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
+      liElem.textContent = `${Hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
       this.total += this.CookiesTotal(this.cust);
       ulElem.appendChild(liElem);
     }
@@ -106,12 +107,12 @@ let Dubai = {
     let liElem = document.createElement('li');
     liElem.textContent = `Total: ${this.total} cookies`;
     ulElem.appendChild(liElem);
-  },
+  }
 };
 
-Dubaie.render();
+dubai.render();
 
-let Paris = {
+let paris = {
   name: 'Paris',
   custMin: 20,
   custMax: 38,
@@ -119,11 +120,11 @@ let Paris = {
   cust: 0,
   total: 0,
   getCust: function (){
-    this.cust = randomCust(this.CustMin, this.CustMax);
+    this.cust = randomCust(this.custMin, this.custMax);
   },
   CookiesTotal: function (NumCookies){
     return Math.round(NumCookies * this.avg);
-  }
+  },
   render: function () {
     let ulElem = document.createElement('ul');
     ulElem.textContent = this.name;
@@ -132,7 +133,7 @@ let Paris = {
     for (let i = 0; i < Hours.length; i++){
       let liElem = document.createElement('li');
       this.getCust();
-      liElem.textContent = `${hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
+      liElem.textContent = `${Hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
       this.total += this.CookiesTotal(this.cust);
       ulElem.appendChild(liElem);
     }
@@ -140,12 +141,12 @@ let Paris = {
     let liElem = document.createElement('li');
     liElem.textContent = `Total: ${this.total} cookies`;
     ulElem.appendChild(liElem);
-  },
+  }
 };
 
-Paris.render();
+paris.render();
 
-let Lima = {
+let lima = {
   name: 'Lima',
   custMin: 2,
   custMax: 16,
@@ -153,11 +154,11 @@ let Lima = {
   cust: 0,
   total: 0,
   getCust: function (){
-    this.cust = randomCust(this.CustMin, this.CustMax);
+    this.cust = randomCust(this.custMin, this.custMax);
   },
   CookiesTotal: function (NumCookies){
     return Math.round(NumCookies * this.avg);
-  }
+  },
   render: function () {
     let ulElem = document.createElement('ul');
     ulElem.textContent = this.name;
@@ -166,7 +167,7 @@ let Lima = {
     for (let i = 0; i < Hours.length; i++){
       let liElem = document.createElement('li');
       this.getCust();
-      liElem.textContent = `${hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
+      liElem.textContent = `${Hours[i]}: ${this.CookiesTotal(this.cust)} cookies`;
       this.total += this.CookiesTotal(this.cust);
       ulElem.appendChild(liElem);
     }
@@ -174,8 +175,8 @@ let Lima = {
     let liElem = document.createElement('li');
     liElem.textContent = `Total: ${this.total} cookies`;
     ulElem.appendChild(liElem);
-  },
+  }
 };
 
-Lima.render();
+lima.render();
 
