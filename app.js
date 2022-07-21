@@ -2,62 +2,84 @@
 
 let storesSection = document.getElementById('stores');
 
-let Hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-let Totalcities = [];
+let Hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+
+Cities.prototype.Totalcities = [];
 
 //Table DOM Set-up
 let tableElem = document.createElement('table');
 storesSection.appendChild(tableElem);
-// let row1 = document.createElement('tr');
-// tableElem.appendChild(row1);
-//let th1Elem = document.createElement('th');
-//th1Elem.textContent = `6am, 7am, 8am, 9am, 10am, 11am, 12pm, 1pm, 2pm, 3pm, 4pm, 5pm, 6pm, 7pm, 8pm`;
-//row1.appendChild(th1Elem);
+
+// Row for Hours
+
+function hoursRow() {
+  let HRow = document.createElement('tr');
+  let Space = document.createElement('th');
+  Space.textContent = ' ';
+  HRow.appendChild(Space);
+  for (let i = 0; i < Hours.length; i++) {
+    let Cell = document.createElement('th');
+    Cell.textContent = Hours[i];
+    HRow.appendChild(Cell);
+    //Cell.textContent = this.mysalesArr[i];
+
+  }
+  storesSection.appendChild(HRow);
+}
+
 
 //Methods, functions, constructors
+
+function randomCust(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+
+}
+
+
 
 function Cities(name, custMin, custMax, avg) {
   this.name = name;
   this.custMin = custMin;
   this.custMax = custMax;
   this.avg = avg;
-  this.cust = 0;
+  this.cust = [];
   this.total = 0;
   this.mysalesArr = [];
 
-  Totalcities.push(this);
-}
-console.log(Cities);
-function randomCust(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-
+  this.Totalcities.push(this);
 }
 Cities.prototype.getCust = function () {
-  this.cust = randomCust(this.custMin, this.custMax);
+  for (let i = 0; i < Hours.length; i++) {
+    this.cust.push(randomCust(this.custMin, this.custMax));
+
+  }
+
 };
 Cities.prototype.getTotal = function () {
-  let q1 = Math.round(this.cust * this.avg);
-  this.mysalesArr.push(q1);
-  return q1;
+  this.getCust();
+  for (let i = 0; i < Hours.length; i++) {
+    // this.getCust();
+    let q1 = Math.round(this.cust[i] * this.avg);
+    this.mysalesArr.push(q1);
+    this.total += q1;
+  }
+  //console.log(q1);
 };
 Cities.prototype.render = function () {
-  let Nextrow = document.createElement('th');
-  Nextrow.textContent = this.name;
-
+  let Nextrow = document.createElement('tr');
+  let NewRow = document.createElement('td');
+  NewRow.textContent = `${this.name} `;
+  Nextrow.appendChild(NewRow);
   for (let i = 0; i < Hours.length; i++) {
     this.getTotal();
-    let row1 = document.createElement('tr');
-    tableElem.appendChild(row1);
-    let NewRow = document.createElement('td');
-    this.getCust();
-    NewRow.textContent = `${this.mysalesArr[i]} cookies`;
-    console.log(this.mysalesArr);
-    row1.appendChild(NewRow);
-    //   // this.total += this.getTotal();
-    //   ulElem.appendChild(liElem);
+    let row1 = document.createElement('td');
+    row1.textContent = this.mysalesArr[i];
+    Nextrow.appendChild(row1);
+
   }
   storesSection.appendChild(Nextrow);
 };
+Cities.prototype.Totalcities = [];
 
 let seattle = new Cities('seattle', 23, 65, 6.3);
 let tokyo = new Cities('tokyo', 3, 24, 1.2);
@@ -68,15 +90,14 @@ let lima = new Cities('lima', 2, 16, 4.6);
 
 
 function renderCitites() {
-  for (let i = 0; i < Totalcities.length; i++) {
-    let currentCity = Totalcities[i];
-    currentCity.getCust();
+  for (let i = 0; i < Cities.prototype.Totalcities.length; i++) {
+    let currentCity = Cities.prototype.Totalcities[i];
     currentCity.render();
   }
 }
-
+hoursRow();
 renderCitites();
-console.log(Totalcities);
+
 
 //renderCitites();
 // create a constructor that combines all of this info and makes a table out of it
